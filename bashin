@@ -4,7 +4,8 @@
 
 if [ "$#" -ne 1 ]; then
 	echo -e "\n[!] You can only pass one argument to this script"
-	exit 1
+	# returns tput before exiting in case it was hidden
+	tput cnorm && exit 1
 fi
 
 filename=$1
@@ -26,7 +27,7 @@ grayColor="\e[0;37m\033[1m"
 
 function ctrl_c() {
         echo -e "\n\n\${redColor}[!]\${endColor} Exiting..."
-        exit 1
+        tput cnorm && exit 1
 }
 
 # Ctrl+c to trap to abort program at any point
